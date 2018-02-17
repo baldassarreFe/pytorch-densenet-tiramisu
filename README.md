@@ -37,8 +37,6 @@ The optional bottleneck makes the structure of a Dense Layer look as follows:
 - (Dropout)
 ```
 
-
-
 #### Dense Blocks
 
 Following the [original implementation](https://github.com/liuzhuang13/DenseNet):
@@ -53,7 +51,9 @@ Following the [original implementation](https://github.com/liuzhuang13/DenseNet)
 - Each subsequent DenseLayer is fed with a tensor obtained by concatenating the input and the output
   of the previous DenseLayer on the channel axis
 - The block output is the concatenation of the output of every DenseLayer, and optionally the block input,
-  so it will have a channel depth of `growth_rate * num_layers` or `growth_rate * num_layers + in_channels` 
+  so it will have a channel depth of `growth_rate * num_layers` or `growth_rate * num_layers + in_channels`
+  
+![dense_block.jpg](resources/dense_block.jpg)
 
 #### Transition Layers
 > We refer to layers between blocks as transition
