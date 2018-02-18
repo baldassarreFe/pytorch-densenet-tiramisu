@@ -3,8 +3,8 @@ import unittest
 from torch import FloatTensor, Size
 from torch.autograd import Variable
 
-from densenet import DenseNet, DenseNet121, DenseNet161, DenseNet169, DenseNet201
-from densenet.utils import count_parameters
+from dense import DenseNet, DenseNet121, DenseNet161, DenseNet169, DenseNet201
+from dense.utils import count_parameters
 
 
 class TestDenseNet(unittest.TestCase):

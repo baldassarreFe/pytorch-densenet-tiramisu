@@ -3,8 +3,8 @@ import unittest
 from torch import FloatTensor
 from torch.autograd import Variable
 
-from densenet.utils import count_parameters
-from densenet.shared import Bottleneck
+from dense.shared import Bottleneck
+from dense.utils import count_parameters
 
 
 class TestBettleneck(unittest.TestCase):

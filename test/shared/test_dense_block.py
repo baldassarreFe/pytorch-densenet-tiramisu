@@ -3,8 +3,8 @@ import unittest
 from torch import FloatTensor
 from torch.autograd import Variable
 
-from densenet.utils import count_parameters
-from densenet.shared import DenseBlock
+from dense.shared import DenseBlock
+from dense.utils import count_parameters
 
 
 class TestDenseBlock(unittest.TestCase):

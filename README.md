@@ -67,6 +67,15 @@ Following the [original implementation](https://github.com/liuzhuang13/DenseNet)
   layers. If a dense block contains m feature-maps, we let
   the following transition layer generate `[θm]` output feature maps,
   where `0<θ≤1` is referred to as the compression factor
+  
+This description correspondes to the following layers:
+
+```
+- Batch Normalization
+- ReLU
+- 1x1 Convolution (θm filters)
+- Average Pooling
+```
 
 ## FCDenseNet
 
@@ -79,10 +88,20 @@ Paper: [The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Seman
 - In the _upward_ path, each Dense Block only concatenates the outputs, dropping the block input
   (Output channels: `growth_rate * num_layers`)
 
-#### Transition Layers
+#### Transition Down
 > A transition down is introduced to reduce the spatial dimensionality
-  of the feature maps. Such transformation is
-  composed of a 1×1 convolution (which conserves the number
-  of feature maps) followed by a 2 × 2 pooling operation.
+  of the feature maps. Such transformation is composed of a 1×1 convolution 
+  (which conserves the number of feature maps) followed by a 2 × 2 pooling operation.
   
-In FCDenseNet the transition blocks do not change the number of channels.
+Differences from the Transition Layer in DenseNet:
+- TransitionDown blocks do not change the number of channels, i.e. no "compression" is performed
+- TransitionDown blocks might include a Dropout layer
+- TransitionDown blocks use Max Pooling instead of Average Pooling
+
+```
+- Batch Normalization
+- ReLU
+- 1x1 Convolution (preserving the number of channels)
+- (Dropout)
+- Max Pooling
+```

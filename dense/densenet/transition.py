@@ -16,7 +16,7 @@ class Transition(Sequential):
         self.in_channels = in_channels
         self.out_channels = int(ceil(compression * in_channels))
 
-        self.add_module('norm', BatchNorm2d(num_features=in_channels))
+        self.add_module('norm', BatchNorm2d(num_features=self.in_channels))
         self.add_module('relu', ReLU(inplace=True))
-        self.add_module('conv', Conv2d(in_channels, self.out_channels, kernel_size=1, bias=False))
+        self.add_module('conv', Conv2d(self.in_channels, self.out_channels, kernel_size=1, bias=False))
         self.add_module('pool', AvgPool2d(kernel_size=2, stride=2))

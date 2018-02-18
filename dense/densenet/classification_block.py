@@ -1,6 +1,6 @@
 from torch.nn import Sequential, BatchNorm2d, ReLU, AvgPool2d, Linear
 
-from densenet.shared import Flatten
+from dense.shared import Flatten
 
 
 class ClassificationBlock(Sequential):

@@ -1,6 +1,7 @@
-import torch
-from torch.nn import Module, ModuleList
 from typing import Optional
+
+import torch
+from torch.nn import Module
 
 from .dense_layer import DenseLayer
 

@@ -4,9 +4,10 @@ from typing import Sequence, Union
 from torch.nn import Sequential, Conv2d, BatchNorm2d, Linear, init
 from torch.nn import functional as F
 
-from .feature_block import FeatureBlock
 from .classification_block import ClassificationBlock
-from ..shared import DenseBlock, Transition
+from .feature_block import FeatureBlock
+from .transition import Transition
+from ..shared import DenseBlock
 
 
 class DenseNet(Sequential):

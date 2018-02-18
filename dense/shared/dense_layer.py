@@ -4,6 +4,7 @@ from torch.nn import Sequential, BatchNorm2d, ReLU, Conv2d, Dropout2d
 
 from .bottleneck import Bottleneck
 
+
 class DenseLayer(Sequential):
     r"""
     Dense Layer as described in [DenseNet](https://arxiv.org/abs/1608.06993)

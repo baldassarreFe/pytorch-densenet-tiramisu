@@ -4,8 +4,8 @@ from math import ceil
 from torch import FloatTensor
 from torch.autograd import Variable
 
-from densenet.utils import count_parameters
-from densenet.shared import Transition
+from dense.densenet.transition import Transition
+from dense.utils import count_parameters
 
 
 class TestTransition(unittest.TestCase):
