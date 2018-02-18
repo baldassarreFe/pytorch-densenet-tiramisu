@@ -1,5 +1,11 @@
 # DenseNet and FCDenseNet
 
+## Installation
+
+```bash
+pip install -e .
+```
+
 ## DenseNet
 
 Paper: [Densely Connected Convolutional Networks](https://arxiv.org/abs/1608.06993)
