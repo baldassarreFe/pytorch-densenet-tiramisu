@@ -3,9 +3,10 @@ from typing import Optional
 from torch.nn import Sequential, BatchNorm2d, ReLU, Conv2d, Dropout2d
 
 from .bottleneck import Bottleneck
+from ..utils import RichRepr
 
 
-class DenseLayer(Sequential):
+class DenseLayer(RichRepr, Sequential):
     r"""
     Dense Layer as described in [DenseNet](https://arxiv.org/abs/1608.06993)
     and implemented in https://github.com/liuzhuang13/DenseNet
@@ -37,3 +38,6 @@ class DenseLayer(Sequential):
 
         if dropout > 0:
             self.add_module('drop', Dropout2d(dropout, inplace=True))
+
+    def __repr__(self):
+        return super(DenseLayer, self).__repr__(self.in_channels, self.out_channels)

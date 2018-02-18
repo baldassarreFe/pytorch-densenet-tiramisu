@@ -4,7 +4,7 @@ from torch import FloatTensor, Size
 from torch.autograd import Variable
 
 from dense import DenseNet, DenseNet121, DenseNet161, DenseNet169, DenseNet201
-from dense.utils import count_parameters
+from dense.utils import count_parameters, count_conv2d
 
 
 class TestDenseNet(unittest.TestCase):
@@ -19,7 +19,6 @@ class TestDenseNet(unittest.TestCase):
         print('Images:', self.images.shape)
 
     def test_densenet(self):
-
         densenets = [
             DenseNet(self.rgb_channels, self.imagenet_classes),
             DenseNet121(),
@@ -31,11 +30,14 @@ class TestDenseNet(unittest.TestCase):
         for densenet in densenets:
             with self.subTest(klass=type(densenet).__name__):
                 print(densenet)
+                layers = count_conv2d(densenet)
+                print('Layers:', layers)
                 print('Parameters:', count_parameters(densenet))
 
                 logits = densenet(self.images)
                 print('Logits:', logits.shape)
                 self.assertEqual(logits.shape, Size((self.batch_size, self.imagenet_classes)))
+
 
 if __name__ == '__main__':
     unittest.main()

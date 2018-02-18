@@ -4,9 +4,10 @@ import torch
 from torch.nn import Module
 
 from .dense_layer import DenseLayer
+from ..utils import RichRepr
 
 
-class DenseBlock(Module):
+class DenseBlock(RichRepr, Module):
     r"""
     Dense Block as described in [DenseNet](https://arxiv.org/abs/1608.06993)
     and implemented in https://github.com/liuzhuang13/DenseNet
@@ -25,6 +26,8 @@ class DenseBlock(Module):
 
         self.concat_input = concat_input
         self.in_channels = in_channels
+        self.growth_rate = growth_rate
+        self.num_layers = num_layers
         self.out_channels = growth_rate * num_layers
         if self.concat_input:
             self.out_channels += self.in_channels
@@ -44,9 +47,17 @@ class DenseBlock(Module):
 
         all_outputs = [block_input] if self.concat_input else []
         for layer in self._modules.values():
+            # TODO check https://github.com/pytorch/pytorch/issues/5332
+            # In version 0.3 pytorch can't concatenate empty variables, but is ok with empty tensors,
+            # Check the issue to see how this develops
             if layer_output.dim() != 0:
                 layer_input = torch.cat([layer_input, layer_output], dim=1)
             layer_output = layer(layer_input)
             all_outputs.append(layer_output)
 
         return torch.cat(all_outputs, dim=1)
+
+    def __repr__(self):
+        concat_input = f'+{self.in_channels}' if self.concat_input else ''
+        out_channels = f'{self.num_layers}*{self.growth_rate}{concat_input}={self.out_channels}'
+        return super(DenseBlock, self).__repr__(self.in_channels, out_channels)

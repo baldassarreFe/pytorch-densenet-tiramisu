@@ -81,12 +81,20 @@ This description correspondes to the following layers:
 
 Paper: [The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Semantic Segmentation](https://arxiv.org/abs/1611.09326)
 
-#### Dense Blocks 'down' vs 'up'
+#### Dense Blocks
+> Dense block layers are composed of BN, followed by ReLU, a 3 × 3 'same' convolution (no resolution loss) 
+  and dropout with probability p = 0.2. The growth rate of the layer is set to k = 16
+  
+> Since the upsampling path increases the feature maps spatial resolution, the linear growth in the number of features
+  would be too memory demanding, especially for the full resolution features in the pre-softmax layer. 
+  In order to overcome this limitation, the input of a dense block is not concatenated with its output
 
-- In the _downward_ path, each Dense Block concatenates the outputs of its Dense Layers to the input 
-  (Output channels: `growth_rate * num_layers + in_channels`)
-- In the _upward_ path, each Dense Block only concatenates the outputs, dropping the block input
-  (Output channels: `growth_rate * num_layers`)
+- In the architecture of a Dense Block from the FCDenseNet paper there is no mention of a Bottleneck layer
+- Difference between downward and upward paths:
+    - In the _downward_ path, each Dense Block concatenates the outputs of its Dense Layers to the input 
+      (Output channels: `growth_rate * num_layers + in_channels`)
+    - In the _upward_ path, each Dense Block only concatenates the outputs, dropping the block input
+      (Output channels: `growth_rate * num_layers`)
 
 #### Transition Down
 > A transition down is introduced to reduce the spatial dimensionality

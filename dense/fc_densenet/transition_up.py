@@ -3,8 +3,10 @@ from typing import Optional
 import torch
 from torch.nn import Module, ConvTranspose2d
 
+from ..utils import RichRepr
 
-class TransitionUp(Module):
+
+class TransitionUp(RichRepr, Module):
     r"""
     Transition Up Block as described in [FCDenseNet](https://arxiv.org/abs/1611.09326)
     """
@@ -21,17 +23,22 @@ class TransitionUp(Module):
         self.skip_channels = skip_channels
         self.out_channels = upsample_channels + skip_channels if skip_channels is not None else None
 
-        self.add_module('conv', ConvTranspose2d(self.upsample_channels, self.upsample_channels,
-                                                kernel_size=3, stride=2, padding=0, bias=True))
+        self.add_module('upconv', ConvTranspose2d(self.upsample_channels, self.upsample_channels,
+                                                  kernel_size=3, stride=2, padding=0, bias=True))
         self.add_module('concat', CenterCropConcat())
 
     def forward(self, upsample, skip):
         if self.skip_channels is not None and skip.shape[1] != self.skip_channels:
             raise ValueError(f'Number of channels in the skip connection input ({skip.shape[1]}) '
                              f'is different from the expected number of channels ({self.skip_channels})')
-        res = self.conv(upsample)
+        res = self.upconv(upsample)
         res = self.concat(res, skip)
         return res
+
+    def __repr__(self):
+        skip_channels = self.skip_channels if self.skip_channels is not None else "?"
+        out_channels = self.out_channels if self.out_channels is not None else "?"
+        return super(TransitionUp, self).__repr__(f'[{self.upsample_channels}, {skip_channels}] -> {out_channels})')
 
 
 class CenterCropConcat(Module):
