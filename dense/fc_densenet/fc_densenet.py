@@ -61,7 +61,8 @@ class FCDenseNet(Module):
         # endregion
 
         # region First convolution
-        self.features = Conv2d(in_channels, initial_num_features, kernel_size=3, bias=False)
+        # The Lasagne implementation uses convolution with 'same' padding, the PyTorch equivalent is padding=1
+        self.features = Conv2d(in_channels, initial_num_features, kernel_size=3, padding=1, bias=False)
         current_channels = self.features.out_channels
         # endregion
 

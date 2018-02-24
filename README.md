@@ -87,6 +87,8 @@ This description correspondes to the following layers:
 
 Paper: [The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Semantic Segmentation](https://arxiv.org/abs/1611.09326)
 
+Reference implementation: [github repo](https://github.com/SimJeg/FC-DenseNet)
+
 #### Dense Blocks
 > Dense block layers are composed of BN, followed by ReLU, a 3 × 3 'same' convolution (no resolution loss) 
   and dropout with probability p = 0.2. The growth rate of the layer is set to k = 16
