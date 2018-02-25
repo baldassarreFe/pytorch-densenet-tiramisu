@@ -1,3 +1,7 @@
+# IntelliJ files
 .idea
 *.iml
+
+# Python files
+__pycache__/
 *.egg-info
