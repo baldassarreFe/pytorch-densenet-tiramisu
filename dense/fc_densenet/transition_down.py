@@ -32,4 +32,4 @@ class TransitionDown(RichRepr, Sequential):
         self.add_module('pool', MaxPool2d(kernel_size=2, stride=2))
 
     def __repr__(self):
-        return super(TransitionDown, self).__repr__(self.in_channels, self.out_channels, dropout=self.drop.p)
+        return super(TransitionDown, self).__repr__(self.in_channels, self.out_channels, dropout=self.dropout)
