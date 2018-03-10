@@ -9,6 +9,9 @@ from ..utils import RichRepr
 class TransitionUp(RichRepr, Module):
     r"""
     Transition Up Block as described in [FCDenseNet](https://arxiv.org/abs/1611.09326)
+
+    The block upsamples the feature map and concatenates it with the feature map coming from the skip connection.
+    If the two maps don't overlap perfectly they are first aligened centrally and cropped to match.
     """
 
     def __init__(self, upsample_channels: int, skip_channels: Optional[int] = None):

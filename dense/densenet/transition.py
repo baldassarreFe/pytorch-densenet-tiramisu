@@ -9,6 +9,12 @@ class Transition(RichRepr, Sequential):
     r"""
     Transition Block as described in [DenseNet](https://arxiv.org/abs/1608.06993)
     and implemented in https://github.com/liuzhuang13/DenseNet
+
+    Consists of:
+    - Batch Normalization
+    - ReLU
+    - 1x1 Convolution (with optional compression of the number of channels)
+    - 2x2 Average Pooling
     """
 
     def __init__(self, in_channels, compression: float = 1.0):

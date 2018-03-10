@@ -1,9 +1,9 @@
 from .fc_densenet import FCDenseNet
 
 
-class FCDensenet103(FCDenseNet):
+class FCDenseNet103(FCDenseNet):
     def __init__(self, in_channels=3, out_channels=1000, dropout=0.2):
-        super(FCDensenet103, self).__init__(
+        super(FCDenseNet103, self).__init__(
             in_channels=in_channels,
             out_channels=out_channels,
             initial_num_features=48,

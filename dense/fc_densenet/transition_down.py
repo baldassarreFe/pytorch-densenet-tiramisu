@@ -9,6 +9,13 @@ class TransitionDown(RichRepr, Sequential):
     r"""
     Transition Down Block as described in [FCDenseNet](https://arxiv.org/abs/1611.09326),
     plus compression from [DenseNet](https://arxiv.org/abs/1608.06993)
+
+    Consists of:
+    - Batch Normalization
+    - ReLU
+    - 1x1 Convolution (with optional compression of the number of channels)
+    - (Dropout)
+    - 2x2 Max Pooling
     """
 
     def __init__(self, in_channels: int, compression: float = 1.0, dropout: float = 0.0):

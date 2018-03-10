@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='DenseNet',
+    name='densenet',
     version='0.1.0',
     description='PyTorch implementation of DenseNet and FCDenseNet',
     author='Federico Baldassarre',
