@@ -1,7 +1,6 @@
 import unittest
 
-from torch import FloatTensor
-from torch.autograd import Variable
+import torch
 
 from dense.shared import DenseBlock
 from dense.utils import count_parameters
@@ -11,7 +10,7 @@ class TestDenseBlock(unittest.TestCase):
 
     def test_dense_block(self):
         in_channels = 64
-        x = Variable(FloatTensor(1, in_channels, 32, 64))
+        x = torch.empty(1, in_channels, 32, 64)
         print('x:', x.shape)
 
         block_params = [

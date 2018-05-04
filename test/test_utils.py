@@ -28,10 +28,15 @@ class DummyMLP(RichRepr, Sequential):
 class TestUtils(unittest.TestCase):
     def test_rich_repr(self):
         dl = DummyMLP()
-        print(dl)
+        string = str(dl)
+        self.assertIn(dl.__class__.__name__, string)
+        self.assertIn('softmax', string)
 
         dl = DummyMLP(in_features=2, layers=(4, 6, 4, 2), final_softmax=False)
-        print(dl)
+        string = str(dl)
+        self.assertIn(dl.__class__.__name__, string)
+        self.assertIn('2, 4, 6, 4, 2', string)
+        self.assertIn('logits', string)
 
 
 if __name__ == '__main__':

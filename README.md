@@ -12,7 +12,7 @@ and that are therefore easy to import and reuse.
 
 ## Requirements and installation
 
-The project is based on Python 3.6+ and PyTorch 0.3.1+.
+The project is based on Python 3.6+ and PyTorch 0.4+.
 
 To make sure all the requirements are installed, a conda environment is recommended:
 ```bash
@@ -287,7 +287,7 @@ This is the general workflow:
 ```bash
 git clone https://github.com/<your username>/pytorch-densenet-tiramisu
 cd pytorch-densenet-tiramisu
-conda create --file densenet.yml
+conda env create --file densenet.yml
 source activate densenet
 pip install -e .
 git checkout -b <feature branch>

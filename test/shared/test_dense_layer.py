@@ -1,7 +1,6 @@
 import unittest
 
-from torch import FloatTensor
-from torch.autograd import Variable
+import torch
 
 from dense.shared import DenseLayer
 from dense.utils import count_parameters
@@ -12,7 +11,7 @@ class TestDenseLayer(unittest.TestCase):
     def test_dense_layer(self):
         in_channels = 512
         out_channels = 8
-        x = Variable(FloatTensor(1, in_channels, 32, 64))
+        x = torch.empty(1, in_channels, 32, 64)
         print('x:', x.shape)
         
         layer_params = [

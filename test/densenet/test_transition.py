@@ -1,8 +1,7 @@
 import unittest
 from math import ceil
 
-from torch import FloatTensor
-from torch.autograd import Variable
+import torch
 
 from dense.densenet.transition import Transition
 from dense.utils import count_parameters
@@ -14,7 +13,7 @@ class TestTransition(unittest.TestCase):
         in_channels = 512
         H = 32
         W = 64
-        x = Variable(FloatTensor(1, in_channels, H, W))
+        x = torch.empty(1, in_channels, H, W)
         print('x:', x.shape)
 
         for c in [1.0, 0.9, 0.001]:

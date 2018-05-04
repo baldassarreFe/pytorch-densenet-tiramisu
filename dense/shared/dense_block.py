@@ -43,15 +43,12 @@ class DenseBlock(RichRepr, Module):
 
     def forward(self, block_input):
         layer_input = block_input
-        layer_output = torch.autograd.Variable(torch.FloatTensor())  # empty
+        # empty tensor (not initialized) + shape=(0,)
+        layer_output = block_input.new_empty(0)
 
         all_outputs = [block_input] if self.concat_input else []
         for layer in self._modules.values():
-            # TODO check https://github.com/pytorch/pytorch/issues/5332
-            # In version 0.3 pytorch can't concatenate empty variables, but is ok with empty tensors,
-            # Check the issue to see how this develops
-            if layer_output.dim() != 0:
-                layer_input = torch.cat([layer_input, layer_output], dim=1)
+            layer_input = torch.cat([layer_input, layer_output], dim=1)
             layer_output = layer(layer_input)
             all_outputs.append(layer_output)
 

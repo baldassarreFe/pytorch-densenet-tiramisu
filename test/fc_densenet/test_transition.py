@@ -1,7 +1,6 @@
 import unittest
 
-from torch import FloatTensor
-from torch.autograd import Variable
+import torch
 
 from dense.fc_densenet.transition_down import TransitionDown
 from dense.fc_densenet.transition_up import TransitionUp, CenterCropConcat
@@ -14,7 +13,7 @@ class TestTransition(unittest.TestCase):
         in_channels = 512
         H = 32
         W = 64
-        x = Variable(FloatTensor(1, in_channels, H, W))
+        x = torch.zeros(1, in_channels, H, W)
         print('x:', x.shape)
 
         for d in [0.0, 0.2]:
@@ -31,8 +30,8 @@ class TestTransition(unittest.TestCase):
                 self.assertEqual(y.shape[3], W // 2)
 
     def test_center_crop_concat(self):
-        x = Variable(FloatTensor(1, 3, 2, 6).zero_())
-        y = Variable(FloatTensor(1, 7, 5, 4).zero_())
+        x = torch.zeros(1, 3, 2, 6)
+        y = torch.zeros(1, 7, 5, 4)
         x[:, :, :, 1:5] = 1
         y[:, :, 1:3, :] = 1
         print('x:', x.shape)
@@ -49,8 +48,8 @@ class TestTransition(unittest.TestCase):
 
     def test_transition_up(self):
         # Transposed convolution upsamples this to (:, :, 13, 17)
-        upsample = Variable(FloatTensor(1, 3, 6, 8).zero_())
-        skip = Variable(FloatTensor(1, 7, 15, 14).zero_())
+        upsample = torch.zeros(1, 3, 6, 8)
+        skip = torch.zeros(1, 7, 15, 14)
         print('upsample:', upsample.shape)
         print('skip:', skip.shape)
 

@@ -81,12 +81,12 @@ class DenseNet(Sequential):
         # region Weight initialization
         for module in self.modules():
             if isinstance(module, Conv2d):
-                init.kaiming_normal(module.weight)
+                init.kaiming_normal_(module.weight)
             elif isinstance(module, BatchNorm2d):
                 module.reset_parameters()
             elif isinstance(module, Linear):
-                init.xavier_uniform(module.weight)
-                init.constant(module.bias, 0)
+                init.xavier_uniform_(module.weight)
+                init.constant_(module.bias, 0)
         # endregion
 
     def predict(self, x):

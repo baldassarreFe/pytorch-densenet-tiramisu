@@ -2,8 +2,8 @@ import unittest
 
 from dense import FCDenseNet, FCDenseNet103
 from dense.utils import count_parameters, count_conv2d
-from torch import FloatTensor, Size
-from torch.autograd import Variable
+
+import torch
 
 
 class TestDenseNet(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestDenseNet(unittest.TestCase):
         self.W = 240
         self.num_classes = 11
 
-        self.images = Variable(FloatTensor(self.batch_size, self.rgb_channels, self.H, self.W))
+        self.images = torch.empty(self.batch_size, self.rgb_channels, self.H, self.W)
         print('Images:', self.images.shape)
 
     def test_fc_densenet(self):
@@ -44,7 +44,7 @@ class TestDenseNet(unittest.TestCase):
 
         logits = densenet(self.images)
         print('Logits:', logits.shape)
-        self.assertEqual(logits.shape, Size((self.batch_size, self.num_classes, self.H, self.W)))
+        self.assertEqual(logits.shape, torch.Size((self.batch_size, self.num_classes, self.H, self.W)))
 
     def test_fc_densenet_103(self):
         densenet = FCDenseNet103()
