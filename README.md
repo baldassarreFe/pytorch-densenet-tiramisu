@@ -12,20 +12,28 @@ and that are therefore easy to import and reuse.
 
 ## Requirements and installation
 
-The project is based on Python 3.6+ and PyTorch 0.4+.
+The minimal requirements for the library are Python 3.6+ and PyTorch 1.1+.
 
-To make sure all the requirements are installed, a conda environment is recommended:
+A conda environment as such is recommended:
 ```bash
-conda create --name venv python=3.6
-source activate venv
-conda install pytorch torchvision -c pytorch
+conda create --name densenet python=3.7
+conda install --name densenet -c pytorch pytorch torchvision
 ```
 
-Within the correct environment, install the package from the repository:
+Within the correct environment, install the package from GitHub:
 ```bash
+conda activate densenet
 pip install git+https://github.com/baldassarreFe/pytorch-densenet-tiramisu
 ```
 
+For training and development, do:
+```bash
+conda env create -f conda.yaml
+conda activate densenet
+git clone https://github.com/baldassarreFe/pytorch-densenet-tiramisu
+pip install --editable pytorch-densenet-tiramisu
+pytest pytorch-densenet-tiramisu
+```
 ## Usage
 
 Either load a predefined network:
